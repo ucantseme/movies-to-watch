@@ -1,0 +1,33 @@
+.root {
+  background-color: transparent;
+}
+.link {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #fff;
+  &:hover {
+    .linkItem::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+}
+.linkItem {
+  margin-left: 8px;
+  position: relative;
+  &::after {
+    content: '';
+    width: 100%;
+    border: 1px solid #fff;
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: center center;
+    transition: opacity 0.25s, transform 0.25s;
+  }
+}
