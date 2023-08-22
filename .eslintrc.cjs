@@ -13,6 +13,7 @@ module.exports = {
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh'],
   rules: {
+    'import/no-extraneous-dependencies': 0,
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
@@ -23,5 +24,6 @@ module.exports = {
     ],
     'react/prop-types': 0,
     'react/button-has-type': 0,
+    'no-console': 0,
   },
 }
