@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getMovies } from '../../api/movie';
+import Title from '../Title';
 import MovieList from './MovieList';
 
 const Movies = () => {
@@ -17,7 +18,10 @@ const Movies = () => {
   }, []);
 
   return (
-    <MovieList list={list} />
+    <>
+      <Title />
+      <MovieList list={list} />
+    </>
   );
 };
 
