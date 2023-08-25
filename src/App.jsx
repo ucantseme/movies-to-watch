@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Header from './components/Header';
 import Movies from './components/Movies';
 import WatchList from './components/WatchList';
+import Movie from './components/Movie';
 import Error from './components/Error';
 
 const darkTheme = createTheme({
@@ -24,12 +25,15 @@ const App = () => (
     <ThemeProvider theme={darkTheme}>
       <div className="app">
         <Header />
-        <Routes>
-          <Route path="/" element={<Error />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/watch-list" element={<WatchList />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
+        <div className="main">
+          <Routes>
+            <Route path="/" element={<Error />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/watch-list" element={<WatchList />} />
+            <Route path="/movie/:movieId" element={<Movie />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+        </div>
       </div>
     </ThemeProvider>
   </Router>

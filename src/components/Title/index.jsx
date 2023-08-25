@@ -51,10 +51,10 @@ const Title = () => {
       <Typography variant="h4" m={2}>
         {currentTitle}
       </Typography>
-      <FormControl>
+      <FormControl size="small">
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="demo-select-small-label"
+          id="demo-select-small"
           value={sort}
           onChange={handleSelectChange}
         >
