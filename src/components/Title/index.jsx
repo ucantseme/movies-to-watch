@@ -4,6 +4,11 @@ import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
+
 import { useState } from 'react';
 
 const title = {
@@ -51,7 +56,7 @@ const Title = () => {
       <Typography variant="h4" m={2}>
         {currentTitle}
       </Typography>
-      <FormControl size="small">
+      <FormControl size="small" focused={false} hiddenLabel>
         <Select
           labelId="demo-select-small-label"
           id="demo-select-small"
@@ -67,6 +72,18 @@ const Title = () => {
           }
         </Select>
       </FormControl>
+      <Paper sx={{
+        ml: 2, p: '2px 4px', display: 'flex', alignItems: 'center', width: 400,
+      }}
+      >
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="搜尋"
+        />
+        <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+          <SearchIcon />
+        </IconButton>
+      </Paper>
     </Box>
   );
 };

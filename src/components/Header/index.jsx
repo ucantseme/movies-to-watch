@@ -3,7 +3,7 @@ import Toolbar from '@mui/material/Toolbar';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TheatersOutlinedIcon from '@mui/icons-material/TheatersOutlined';
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import style from './Header.module.scss';
 
 const Header = () => (
@@ -15,8 +15,8 @@ const Header = () => (
           <span className={style.linkItem}>電影</span>
         </Link>
         <Link className={style.link} to="/watch-list">
-          <AddOutlinedIcon />
-          <span className={style.linkItem}>我的片單</span>
+          <AccessTimeIcon />
+          <span className={style.linkItem}>稍後觀看</span>
         </Link>
       </Box>
     </Toolbar>
