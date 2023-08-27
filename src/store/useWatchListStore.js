@@ -32,7 +32,7 @@ const reducer = (state, action) => {
   }
 };
 
-const useMovieList = create((set) => {
+const useWatchListStore = create((set) => {
   const dispatch = (args) => {
     set((state) => reducer(state, args));
   };
@@ -48,4 +48,4 @@ const useMovieList = create((set) => {
   };
 });
 
-export default useMovieList;
+export default useWatchListStore;

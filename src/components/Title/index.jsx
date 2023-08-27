@@ -80,7 +80,7 @@ const Title = () => {
           sx={{ ml: 1, flex: 1 }}
           placeholder="搜尋"
         />
-        <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+        <IconButton type="button" size="small" aria-label="search">
           <SearchIcon />
         </IconButton>
       </Paper>
