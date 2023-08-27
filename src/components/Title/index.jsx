@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
@@ -12,7 +12,8 @@ import useMovieListStore from '../../store/useMovieListStore';
 
 const title = {
   movies: '電影',
-  'watch-list': '我的片單',
+  search: '搜尋結果',
+  'watch-list': '稍後觀看',
 };
 const menuItems = [
   {
@@ -42,11 +43,17 @@ const menuItems = [
 ];
 
 const Title = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname.replace('/', '');
   const currentTitle = title[pathname] || '電影';
   const {
-    sortType, setSortType, setPage, searchText, setSearchText, getMovieList, resetMovieList,
+    sortType,
+    setSortType,
+    setPage,
+    searchText,
+    setSearchText,
+    getMovieList,
   } = useMovieListStore((state) => ({
     sortType: state.sortType,
     setSortType: state.setSortType,
@@ -54,11 +61,9 @@ const Title = () => {
     searchText: state.searchText,
     setSearchText: state.setSearchText,
     getMovieList: state.getMovieList,
-    resetMovieList: state.resetMovieList,
   }));
 
   const handleSortChange = (event) => {
-    resetMovieList();
     setSortType(event.target.value);
     setPage(1);
     getMovieList();
@@ -70,9 +75,7 @@ const Title = () => {
 
   const handleSearch = () => {
     if (!searchText) return;
-    resetMovieList();
-    setPage(1);
-    getMovieList();
+    navigate(`/search?queryString=${searchText}`);
   };
 
   const handleKeyDown = (event) => {
@@ -86,22 +89,24 @@ const Title = () => {
       <Typography variant="h4" m={2}>
         {currentTitle}
       </Typography>
-      <FormControl size="small" focused={false} hiddenLabel>
-        <Select
-          labelId="demo-select-small-label"
-          id="demo-select-small"
-          value={sortType}
-          onChange={handleSortChange}
-        >
-          {
+      { pathname !== 'search' && (
+        <FormControl size="small" focused={false} hiddenLabel>
+          <Select
+            labelId="demo-select-small-label"
+            id="demo-select-small"
+            value={sortType}
+            onChange={handleSortChange}
+          >
+            {
             menuItems.map((item) => (
               <MenuItem key={item.value} value={item.value}>
                 {item.label}
               </MenuItem>
             ))
           }
-        </Select>
-      </FormControl>
+          </Select>
+        </FormControl>
+      )}
       <Paper sx={{
         ml: 2, p: '2px 4px', display: 'flex', alignItems: 'center', width: 400,
       }}

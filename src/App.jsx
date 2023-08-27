@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Movies from './components/Movies';
 import WatchList from './components/WatchList';
 import Movie from './components/Movie';
+import Search from './components/Search';
 import Error from './components/Error';
 
 const darkTheme = createTheme({
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/movies" element={<Movies />} />
             <Route path="/watch-list" element={<WatchList />} />
             <Route path="/movie/:movieId" element={<Movie />} />
+            <Route path="/search" element={<Search />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </div>

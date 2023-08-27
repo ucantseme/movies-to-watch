@@ -4,6 +4,7 @@ import {
   getMovieListDone,
   getMovieListFail,
   resetMovieList,
+  resetMovieStore,
   setPage,
   setTotalPage,
   setSortType,
@@ -46,7 +47,7 @@ const reducer = (state, action) => {
         isGetMoviesError: false,
       };
     case 'GET_MOVIE_LIST_DONE': {
-      const movies = [...state.movies, ...action.payload];
+      const movies = state.page === 1 ? action.payload : [...state.movies, ...action.payload];
       return {
         ...state,
         movies,
@@ -84,6 +85,8 @@ const reducer = (state, action) => {
         ...state,
         movies: [],
       };
+    case 'RESET_MOVIE_STORE':
+      return initState;
     default:
       return state;
   }
@@ -105,6 +108,7 @@ const useMovieListStore = create((set, get) => {
       const querySortType = sortType ? `&sort_by=${sortType}` : '';
       const queryPage = `&page=${page}`;
       let queryString = queryPage;
+      console.log(queryString);
       if (querySearchText) {
         queryString += querySearchText;
         try {
@@ -119,7 +123,6 @@ const useMovieListStore = create((set, get) => {
         }
       } else {
         queryString += querySortType;
-        console.log(queryString);
         try {
           const { data: { results } } = await getDiscoverMovieList(queryString);
           dispatch(getMovieListDone(results));
@@ -141,6 +144,9 @@ const useMovieListStore = create((set, get) => {
     },
     resetMovieList() {
       dispatch(resetMovieList());
+    },
+    resetMovieStore() {
+      dispatch(resetMovieStore());
     },
   };
 });

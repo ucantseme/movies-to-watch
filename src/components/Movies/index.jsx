@@ -4,15 +4,20 @@ import MovieList from './MovieList';
 import useMovieListStore from '../../store/useMovieListStore';
 
 const Movies = () => {
-  const { movies, getMovieList, setPage } = useMovieListStore((state) => ({
+  const {
+    movies, getMovieList, setPage, resetMovieStore,
+  } = useMovieListStore((state) => ({
     movies: state.movies,
     getMovieList: state.getMovieList,
     setPage: state.setPage,
+    resetMovieStore: state.resetMovieStore,
   }));
+
   useEffect(() => {
     setPage();
     getMovieList();
-  }, [getMovieList, setPage]);
+    return () => resetMovieStore();
+  }, [getMovieList, resetMovieStore, setPage]);
 
   return (
     <>

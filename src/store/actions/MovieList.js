@@ -6,6 +6,8 @@ export const getMovieListFail = () => ({ type: 'GET_MOVIE_LIST_FAIL' });
 
 export const resetMovieList = () => ({ type: 'RESET_MOVIE_LIST' });
 
+export const resetMovieStore = () => ({ type: 'RESET_MOVIE_STORE' });
+
 export const setPage = (page) => ({ type: 'SET_PAGE_NUM', payload: page });
 
 export const setTotalPage = (page) => ({ type: 'SET_TOTAL_PAGE', payload: page });
