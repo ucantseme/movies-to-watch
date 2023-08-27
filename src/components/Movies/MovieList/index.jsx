@@ -4,7 +4,7 @@ import MovieCard from '../MovieCard';
 const MovieList = (props) => {
   const { list } = props;
   return (
-    <ImageList cols={5} gap={8} sx={{ mt: 0, pt: 1 }}>
+    <ImageList gap={12} sx={{ mt: 0, pt: 1, gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr)) !important' }}>
       {list.map((item) => (
         <MovieCard
           key={item.id}

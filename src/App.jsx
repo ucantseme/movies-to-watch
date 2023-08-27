@@ -27,7 +27,7 @@ const App = () => (
         <Header />
         <div className="main">
           <Routes>
-            <Route path="/" element={<Error />} />
+            <Route path="/" element={<Movies />} />
             <Route path="/movies" element={<Movies />} />
             <Route path="/watch-list" element={<WatchList />} />
             <Route path="/movie/:movieId" element={<Movie />} />

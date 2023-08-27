@@ -10,6 +10,6 @@ export const setPage = (page) => ({ type: 'SET_PAGE_NUM', payload: page });
 
 export const setTotalPage = (page) => ({ type: 'SET_TOTAL_PAGE', payload: page });
 
-export const setSortType = (type) => ({ type: 'SET_SORT_TYPE', payload: type });
+export const setSortType = (sortType) => ({ type: 'SET_SORT_TYPE', payload: sortType });
 
 export const setSearchText = (text) => ({ type: 'SET_SEARCH_TEXT', payload: text });

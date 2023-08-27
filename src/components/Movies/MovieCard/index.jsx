@@ -7,7 +7,7 @@ const MovieCard = (props) => {
   const {
     posterPath, title, overview, id,
   } = props;
-  const imageUrl = `https://image.tmdb.org/t/p/original${posterPath}`;
+  const imageUrl = posterPath ? `https://image.tmdb.org/t/p/original${posterPath}` : './public/photo-not-found.svg';
   return (
     <Link to={`/movie/${id}`}>
       <ImageListItem className={style.movieCard}>

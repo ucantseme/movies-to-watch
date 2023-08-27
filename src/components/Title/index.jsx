@@ -8,8 +8,7 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
-
-import { useState } from 'react';
+import useMovieListStore from '../../store/useMovieListStore';
 
 const title = {
   movies: '電影',
@@ -45,12 +44,43 @@ const menuItems = [
 const Title = () => {
   const location = useLocation();
   const pathname = location.pathname.replace('/', '');
-  const currentTitle = title[pathname];
-  const [sort, setSort] = useState('popularity.desc');
+  const currentTitle = title[pathname] || '電影';
+  const {
+    sortType, setSortType, setPage, searchText, setSearchText, getMovieList, resetMovieList,
+  } = useMovieListStore((state) => ({
+    sortType: state.sortType,
+    setSortType: state.setSortType,
+    setPage: state.setPage,
+    searchText: state.searchText,
+    setSearchText: state.setSearchText,
+    getMovieList: state.getMovieList,
+    resetMovieList: state.resetMovieList,
+  }));
 
-  const handleSelectChange = (event) => {
-    setSort(event.target.value);
+  const handleSortChange = (event) => {
+    resetMovieList();
+    setSortType(event.target.value);
+    setPage(1);
+    getMovieList();
   };
+
+  const handleSearchTextChange = (event) => {
+    setSearchText(event.target.value);
+  };
+
+  const handleSearch = () => {
+    if (!searchText) return;
+    resetMovieList();
+    setPage(1);
+    getMovieList();
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <Typography variant="h4" m={2}>
@@ -60,8 +90,8 @@ const Title = () => {
         <Select
           labelId="demo-select-small-label"
           id="demo-select-small"
-          value={sort}
-          onChange={handleSelectChange}
+          value={sortType}
+          onChange={handleSortChange}
         >
           {
             menuItems.map((item) => (
@@ -79,8 +109,11 @@ const Title = () => {
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder="搜尋"
+          value={searchText}
+          onChange={handleSearchTextChange}
+          onKeyDown={handleKeyDown}
         />
-        <IconButton type="button" size="small" aria-label="search">
+        <IconButton type="button" size="small" aria-label="search" onClick={handleSearch}>
           <SearchIcon />
         </IconButton>
       </Paper>

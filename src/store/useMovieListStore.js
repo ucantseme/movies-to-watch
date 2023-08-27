@@ -64,23 +64,26 @@ const reducer = (state, action) => {
         ...state,
         page: action.payload,
       };
-    case 'setSortType':
+    case 'SET_SORT_TYPE':
       return {
         ...state,
         sortType: action.payload,
       };
-    case 'setSearchText':
+    case 'SET_SEARCH_TEXT':
       return {
         ...state,
         searchText: action.payload,
       };
-    case 'setTotalPage':
+    case 'SET_TOTAL_PAGE':
       return {
         ...state,
         totalPage: action.payload,
       };
     case 'RESET_MOVIE_LIST':
-      return initState;
+      return {
+        ...state,
+        movies: [],
+      };
     default:
       return state;
   }
@@ -116,6 +119,7 @@ const useMovieListStore = create((set, get) => {
         }
       } else {
         queryString += querySortType;
+        console.log(queryString);
         try {
           const { data: { results } } = await getDiscoverMovieList(queryString);
           dispatch(getMovieListDone(results));
