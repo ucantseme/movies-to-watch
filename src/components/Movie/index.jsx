@@ -41,7 +41,11 @@ const Movie = () => {
     getMovieDetail();
   }, [movieId]);
   return (
-    loading ? <CircularProgress /> : (
+    loading ? (
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Box>
+    ) : (
       <>
         <div className={style.movieContainer}>
           <div

@@ -22,14 +22,14 @@ const Header = () => {
   return (
     <AppBar className={style.root} position="static">
       <Toolbar>
-        <MovieIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+        <MovieIcon sx={{ display: 'flex', mr: 1 }} />
         <Typography
           variant="h5"
           component="span"
           noWrap
           sx={{
             mr: 2,
-            display: { xs: 'flex', md: 'none' },
+            display: 'flex',
             fontFamily: 'monospace',
             fontWeight: 700,
             letterSpacing: '.3rem',
@@ -38,7 +38,7 @@ const Header = () => {
         >
           MOO
         </Typography>
-        <Box sx={{ flexGrow: 1, display: { mobile: 'flex' } }}>
+        <Box sx={{ flexGrow: 1, display: 'flex', textWrap: 'nowrap' }}>
           <Link className={style.link} to="/movies">
             <span className={style.linkItem}>電影</span>
           </Link>

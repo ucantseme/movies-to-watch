@@ -85,12 +85,12 @@ const Title = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <Typography variant="h4" m={2}>
+    <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+      <Typography variant="h4" m={2} sx={{ fontSize: { xs: '1.25rem', md: '2.125rem' }, textWrap: 'nowrap', marginLeft: { xs: 0 } }}>
         {currentTitle}
       </Typography>
       { pathname !== 'search' && (
-        <FormControl size="small" focused={false} hiddenLabel>
+        <FormControl size="small" focused={false} hiddenLabel sx={{ mr: 2 }}>
           <Select
             labelId="demo-select-small-label"
             id="demo-select-small"
@@ -108,7 +108,7 @@ const Title = () => {
         </FormControl>
       )}
       <Paper sx={{
-        ml: 2, p: '2px 4px', display: 'flex', alignItems: 'center', width: 400,
+        width: { xs: 1, sm: 'auto' }, p: '2px 4px', display: 'flex', alignItems: 'center',
       }}
       >
         <InputBase

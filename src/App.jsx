@@ -10,14 +10,6 @@ const darkTheme = createTheme({
   palette: {
     mode: 'dark',
   },
-  breakpoints: {
-    values: {
-      mobile: 0,
-      table: 640,
-      laptop: 1024,
-      desktop: 1200,
-    },
-  },
 });
 
 const App = () => (
