@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 const request = axios.create({
-  baseURL: 'http://127.0.0.1:3000',
+  baseURL: 'https://asia-east1-practice-397007.cloudfunctions.net',
 });
 
-export const getMovies = (query) => request.get(`/discover/movie?language=zh-TW${query}`);
+export const getMovies = (query) => request.get(`/tmdb-discover?language=zh-TW${query}`);
 
-export const getSearchMovies = (query) => request.get(`/search/movie?language=zh-TW${query}`);
+export const getSearchMovies = (query) => request.get(`/tmdb-search?language=zh-TW${query}`);
 
-export const getMovie = (id) => request.get(`/movie/${id}?language=zh-TW`);
+export const getMovie = (id) => request.get(`/tmdb-movie/${id}?language=zh-TW`);
