@@ -4,7 +4,12 @@ import MovieCard from '../MovieCard';
 const MovieList = (props) => {
   const { list } = props;
   return (
-    <ImageList gap={12} sx={{ mt: 0, pt: 1, gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr)) !important' }}>
+    <ImageList
+      gap={12}
+      sx={{
+        mt: 0, px: 1, pt: 1, gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr)) !important',
+      }}
+    >
       {list.map((item) => (
         <MovieCard
           key={item.id}
