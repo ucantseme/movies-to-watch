@@ -60,11 +60,13 @@ const reducer = (state, action) => {
         isGetMoviesLoading: false,
         isGetMoviesError: true,
       };
-    case 'SET_PAGE_NUM':
+    case 'SET_PAGE_NUM': {
+      const page = action.payload || state.page + 1;
       return {
         ...state,
-        page: action.payload,
+        page,
       };
+    }
     case 'SET_SORT_TYPE':
       return {
         ...state,
@@ -75,11 +77,12 @@ const reducer = (state, action) => {
         ...state,
         searchText: action.payload,
       };
-    case 'SET_TOTAL_PAGE':
+    case 'SET_TOTAL_PAGE': {
       return {
         ...state,
         totalPage: action.payload,
       };
+    }
     case 'RESET_MOVIE_LIST':
       return {
         ...state,
@@ -108,7 +111,6 @@ const useMovieListStore = create((set, get) => {
       const querySortType = sortType ? `&sort_by=${sortType}` : '';
       const queryPage = `&page=${page}`;
       let queryString = queryPage;
-      console.log(queryString);
       if (querySearchText) {
         queryString += querySearchText;
         try {
@@ -120,6 +122,7 @@ const useMovieListStore = create((set, get) => {
           dispatch(getMovieListDone(results));
         } catch (error) {
           dispatch(getMovieListFail());
+          dispatch(setPage(page - 1));
         }
       } else {
         queryString += querySortType;
@@ -128,13 +131,12 @@ const useMovieListStore = create((set, get) => {
           dispatch(getMovieListDone(results));
         } catch (error) {
           dispatch(getMovieListFail());
+          dispatch(setPage(page - 1));
         }
       }
     },
     setPage(num) {
-      const { page } = get();
-      const currentPage = num || page + 1;
-      dispatch(setPage(currentPage));
+      dispatch(setPage(num));
     },
     setSortType(type) {
       dispatch(setSortType(type));

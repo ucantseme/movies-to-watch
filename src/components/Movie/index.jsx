@@ -7,6 +7,7 @@ import Snackbar from '@mui/material/Snackbar';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import CircularProgress from '@mui/material/CircularProgress';
 import { getMovie } from '../../api/movie';
 import useWatchListStore from '../../store/useWatchListStore';
 import style from './Movie.module.scss';
@@ -40,7 +41,7 @@ const Movie = () => {
     getMovieDetail();
   }, [movieId]);
   return (
-    loading ? <div>loading</div> : (
+    loading ? <CircularProgress /> : (
       <>
         <div className={style.movieContainer}>
           <div
@@ -85,7 +86,6 @@ const Movie = () => {
           </div>
         </div>
         <Snackbar
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
           open={showSnackbar}
           onClose={handleCloseSnackbar}
           autoHideDuration={3000}
