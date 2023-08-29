@@ -85,7 +85,10 @@ const Title = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+    <Box sx={{
+      display: 'flex', alignItems: 'center', flexWrap: 'wrap', position: 'sticky', top: 0, zIndex: 2, backgroundColor: '#000',
+    }}
+    >
       <Typography variant="h4" m={2} sx={{ fontSize: { xs: '1.25rem', md: '2.125rem' }, textWrap: 'nowrap', marginLeft: { xs: 0 } }}>
         {currentTitle}
       </Typography>
