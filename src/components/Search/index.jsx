@@ -2,6 +2,8 @@ import { useEffect, useState, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import Title from '../Title';
 import MovieList from '../Movies/MovieList';
 import useMovieListStore from '../../store/useMovieListStore';
@@ -11,20 +13,24 @@ const Search = () => {
     movies,
     getMovieList,
     isGetMoviesLoading,
+    isGetMoviesError,
     resetMovieStore,
     setSearchText,
     setPage,
     page,
     totalPage,
+    resetGetMovieStatus,
   } = useMovieListStore((state) => ({
     movies: state.movies,
     getMovieList: state.getMovieList,
     isGetMoviesLoading: state.isGetMoviesLoading,
+    isGetMoviesError: state.isGetMoviesError,
     resetMovieStore: state.resetMovieStore,
     setSearchText: state.setSearchText,
     setPage: state.setPage,
     page: state.page,
     totalPage: state.totalPage,
+    resetGetMovieStatus: state.resetGetMovieStatus,
   }));
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -76,7 +82,15 @@ const Search = () => {
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <CircularProgress />
       </Box>
-      ) }
+      )}
+      <Snackbar
+        open={isGetMoviesError}
+        onClose={resetGetMovieStatus}
+        autoHideDuration={3000}
+        message="讀取電影列表失敗"
+      >
+        <Alert severity="error" sx={{ width: '100%' }}>讀取電影列表失敗</Alert>
+      </Snackbar>
     </>
   );
 };

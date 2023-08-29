@@ -4,6 +4,8 @@ export const getMovieListDone = (list) => ({ type: 'GET_MOVIE_LIST_DONE', payloa
 
 export const getMovieListFail = () => ({ type: 'GET_MOVIE_LIST_FAIL' });
 
+export const resetGetMovieStatus = () => ({ type: 'RESET_GET_MOVIE_STATUS' });
+
 export const resetMovieList = () => ({ type: 'RESET_MOVIE_LIST' });
 
 export const resetMovieStore = () => ({ type: 'RESET_MOVIE_STORE' });

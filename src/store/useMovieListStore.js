@@ -3,6 +3,7 @@ import {
   getMovieListStart,
   getMovieListDone,
   getMovieListFail,
+  resetGetMovieStatus,
   resetMovieList,
   resetMovieStore,
   setPage,
@@ -57,8 +58,15 @@ const reducer = (state, action) => {
     case 'GET_MOVIE_LIST_FAIL':
       return {
         ...state,
+        page: state.page - 1,
         isGetMoviesLoading: false,
         isGetMoviesError: true,
+      };
+    case 'RESET_GET_MOVIE_STATUS':
+      return {
+        ...state,
+        isGetMoviesLoading: false,
+        isGetMoviesError: false,
       };
     case 'SET_PAGE_NUM': {
       const page = action.payload || state.page + 1;
@@ -143,6 +151,9 @@ const useMovieListStore = create((set, get) => {
     },
     setSearchText(text) {
       dispatch(setSearchText(text));
+    },
+    resetGetMovieStatus() {
+      dispatch(resetGetMovieStatus());
     },
     resetMovieList() {
       dispatch(resetMovieList());

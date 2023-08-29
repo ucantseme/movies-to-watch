@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -17,7 +18,8 @@ import style from './Movie.module.scss';
 const Movie = () => {
   const [detail, setDetail] = useState({});
   const [loading, setLoading] = useState(true);
-  const [showSnackbar, setShowSnackBar] = useState(false);
+  const [showAddToWatchSuccess, setShowAddToWatchSuccess] = useState(false);
+  const [getDetailFail, setGetDetailFail] = useState(false);
   const { movieId } = useParams();
   const theme = useTheme();
   const large = useMediaQuery(theme.breakpoints.up('sm'));
@@ -25,33 +27,40 @@ const Movie = () => {
 
   const handleAddToWatchList = () => {
     addWatchList(detail);
-    setShowSnackBar(true);
+    setShowAddToWatchSuccess(true);
   };
 
   const handleCloseSnackbar = () => {
-    setShowSnackBar(false);
+    setShowAddToWatchSuccess(false);
+  };
+
+  const handleCloseGetDetailFailSnackbar = () => {
+    setGetDetailFail(false);
   };
 
   useEffect(() => {
-    const getMovieDetail = async () => {
+    (async () => {
       try {
         const { data } = await getMovie(movieId);
         setDetail(data);
         setLoading(false);
       } catch (error) {
-        console.error(error);
+        setGetDetailFail(true);
       }
-    };
-    getMovieDetail();
+    })();
   }, [movieId]);
   return (
-    loading ? (
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <CircularProgress />
-      </Box>
-    ) : (
-      <>
-        <div className={style.movieContainer}>
+    <div className={style.movieContainer}>
+      {
+      loading ? (
+        <Box sx={{
+          display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%',
+        }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <>
           <Box
             className={style.movieBg}
             sx={{ top: { xs: '56px', sm: '64px' } }}
@@ -102,16 +111,24 @@ const Movie = () => {
               <Button color="inherit" variant="outlined" size={large ? 'large' : 'medium'} startIcon={<AddCircleOutlineIcon />} onClick={handleAddToWatchList}>稍後觀看</Button>
             </Box>
           </Box>
-        </div>
-        <Snackbar
-          open={showSnackbar}
-          onClose={handleCloseSnackbar}
-          autoHideDuration={3000}
-          message="新增稍後觀看清單成功"
-        />
-      </>
-    )
-
+        </>
+      )
+    }
+      <Snackbar
+        open={showAddToWatchSuccess}
+        onClose={handleCloseSnackbar}
+        autoHideDuration={3000}
+        message="新增稍後觀看清單成功"
+      />
+      <Snackbar
+        open={getDetailFail}
+        onClose={handleCloseGetDetailFailSnackbar}
+        autoHideDuration={3000}
+        message="讀取電影內容失敗"
+      >
+        <Alert severity="error" sx={{ width: '100%' }}>讀取電影內容失敗</Alert>
+      </Snackbar>
+    </div>
   );
 };
 
